@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+ * This file is part of the DinecatThemeBundle package.
+ * @copyright   2015 Dinecat, http://dinecat.com/
+ * @license     http://dinecat.com/licenses/mit MIT License
+ * @link        https://github.com/dinecat/ThemeBundle
+-->
+
+<xsd:schema xmlns:themes="http://dinecat.com/schema/theme-bundle/themes"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     targetNamespace="http://dinecat.com/schema/theme-bundle/themes"
+     elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation><![CDATA[
+            Symfony XML Themes Configuration Schema, version 1.0
+            Authors: Mykola Zyk
+
+            This defines configuration for build and publish themes resources.
+        ]]></xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="themes" type="themes:definitions" />
+
+    <xsd:complexType name="definitions">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[The root element of a themes file.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="theme" type="themes:theme" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="theme">
+        <xsd:sequence>
+            <xsd:element name="stylesheets" type="themes:stylesheets" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="javascripts" type="themes:javascripts" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="icons" type="themes:icons" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="images" type="themes:images" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="presets" type="themes:presets" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="root" type="xsd:string" use="required" />
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+        <xsd:attribute name="pack" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+    <xsd:complexType name="stylesheets">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[Enclosing element for the stylesheet elements.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="stylesheet" type="themes:stylesheet" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="stylesheet" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="src" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="name" type="themes:css_name" />
+        <xsd:attribute name="filter" type="themes:cssfilter_type" />
+        <xsd:attribute name="path" type="xsd:string" />
+        <xsd:attribute name="type" type="themes:resource_type" />
+        <xsd:attribute name="compress" type="xsd:boolean" default="false" />
+        <xsd:attribute name="media" type="xsd:string" />
+        <xsd:attribute name="version" type="xsd:boolean" default="false" />
+    </xsd:complexType>
+
+    <xsd:complexType name="javascripts">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[Enclosing element for the javascript elements.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="javascript" type="themes:javascript" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="javascript" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="src" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="name" type="themes:js_name" />
+        <xsd:attribute name="filter" type="themes:jsfilter_type" />
+        <xsd:attribute name="path" type="xsd:string" />
+        <xsd:attribute name="type" type="themes:resource_type" />
+        <xsd:attribute name="bottom" type="xsd:boolean" default="true" />
+        <xsd:attribute name="compress" type="xsd:boolean" default="false" />
+        <xsd:attribute name="async" type="xsd:boolean" default="false" />
+        <xsd:attribute name="version" type="xsd:boolean" default="false" />
+    </xsd:complexType>
+
+    <xsd:complexType name="icons">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[Enclosing element for the icon elements.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="icon" type="themes:icon" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="icon" mixed="true">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="name" type="themes:icon_name" />
+        <xsd:attribute name="type" type="themes:icon_type" />
+        <xsd:attribute name="sizes" type="xsd:string" />
+        <xsd:attribute name="path" type="xsd:string" />
+        <xsd:attribute name="src" type="xsd:string" />
+        <xsd:attribute name="version" type="xsd:boolean" default="false" />
+    </xsd:complexType>
+
+    <xsd:complexType name="images">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[Enclosing element for the image elements.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="imagePack" type="themes:imagePack" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="imagePack" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="image" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="src" type="xsd:string" use="required" />
+        <xsd:attribute name="path" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+    <xsd:complexType name="presets">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[Enclosing element for the preset elements.]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="preset" type="themes:preset" minOccurs="0" maxOccurs="unbounded">
+                <xsd:unique name="resource_unique">
+                    <xsd:selector xpath="themes:resource" />
+                    <xsd:field xpath="." />
+                </xsd:unique>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="preset">
+        <xsd:sequence>
+            <xsd:element name="resource" type="xsd:NCName" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="name" type="themes:preset_name" use="required" />
+        <xsd:attribute name="appendable" type="xsd:boolean" use="required" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="css_name">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-zA-Z_\.-]*\.css"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="js_name">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-zA-Z_\.-]*\.js"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="icon_name">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-zA-Z_\.-]*\.icon"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="preset_name">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[^\.]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="resource_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="file" />
+            <xsd:enumeration value="inline" />
+            <xsd:enumeration value="link" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="cssfilter_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="less" />
+            <xsd:enumeration value="sass" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="jsfilter_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="js" />
+            <xsd:enumeration value="coffee" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="icon_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="favicon" />
+            <xsd:enumeration value="apple-touch-icon" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,23 @@
+{
+    "name": "dinecat/theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle provide themes functionality integration to Symfony 2 apps.",
+    "keywords": ["metronic", "admin", "theme"],
+    "homepage": "https://github.com/dinecat/ThemeBundle",
+    "license": "MIT",
+    "authors": [
+        {"name": "Dinecat", "homepage": "http://dinecat.com"},
+        {"name": "Mykola Zyk", "email": "relo.san.pub@gmail.com"}
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/framework-bundle": ">=2.1.0,<3.0",
+        "dinecat/i18n-bundle": "~1.1",
+        "jalle19/php-yui-compressor": "~1.0",
+        "leafo/lessphp": "~0.5"
+    },
+    "autoload": {
+        "psr-0": {"Dinecat\\ThemeBundle": ""}
+    },
+    "target-dir": "Dinecat/ThemeBundle"
+}

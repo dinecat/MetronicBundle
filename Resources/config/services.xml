@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of the DinecatThemeBundle package.
+ * @copyright   2015 Dinecat, http://dinecat.com/
+ * @license     http://dinecat.com/licenses/mit MIT License
+ * @link        https://github.com/dinecat/ThemeBundle
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Resource distributor -->
+        <service id="dinecat.theme.resource.distributor" class="Dinecat\ThemeBundle\Model\ResourceDistributor">
+            <argument type="service" />
+            <argument key="options">%dinecat.theme.resource.options%</argument>
+        </service>
+
+        <!-- Resource manager -->
+        <service id="dinecat.theme.resource.manager" class="Dinecat\ThemeBundle\Model\ResourceManager">
+            <argument type="service" />
+            <argument key="options">%dinecat.theme.resource.options%</argument>
+        </service>
+
+        <!-- Resource helper -->
+        <service id="templating.helper.resource" class="Dinecat\ThemeBundle\Templating\Helper\ResourceHelper">
+            <tag name="templating.helper" alias="resource" />
+            <argument type="service" id="dinecat.theme.resource.distributor" />
+        </service>
+    </services>
+
+</container>
