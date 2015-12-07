@@ -29,6 +29,11 @@
             <tag name="templating.helper" alias="resource" />
             <argument type="service" id="dinecat.theme.resource.distributor" />
         </service>
+
+        <!-- Layout helper -->
+        <service id="templating.helper.layout" class="Dinecat\ThemeBundle\Templating\Helper\LayoutHelper">
+            <tag name="templating.helper" alias="layout" />
+        </service>
     </services>
 
 </container>

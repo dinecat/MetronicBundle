@@ -30,7 +30,7 @@ class DinecatThemeExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('dinecat.theme.resource.options', $config['resource']);
         $container->setParameter('dinecat.theme.resource.storage.options', $config['storage']);
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 }

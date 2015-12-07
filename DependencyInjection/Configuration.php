@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder;
+        $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('dinecat_theme');
 
         $resource = $root->children()->arrayNode('resource')->addDefaultsIfNotSet()->children();
@@ -45,7 +45,9 @@ class Configuration implements ConfigurationInterface
         $options->scalarNode('connection');
 
         $storage->validate()
-            ->ifTrue(function ($v) { return $v['type'] === 'redis'; })
+            ->ifTrue(function ($v) {
+                return $v['type'] === 'redis';
+            })
             ->then(function ($v) {
                 if (empty($v['database'])) {
                     throw new \LogicException('You must specify database number for redis driver.');
@@ -61,7 +63,9 @@ class Configuration implements ConfigurationInterface
             });
 
         $storage->validate()
-            ->ifTrue(function ($v) { return $v['type'] === 'sqlite'; })
+            ->ifTrue(function ($v) {
+                return $v['type'] === 'sqlite';
+            })
             ->then(function ($v) {
                 if (empty($v['data_path'])) {
                     throw new \LogicException('You must provide path to database for sqlite driver.');

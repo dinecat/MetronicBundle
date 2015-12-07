@@ -71,6 +71,7 @@ class MetronicPreparerCommand extends ContainerAwareCommand
         $this->output = $output;
         $this->fs = new Filesystem();
 
+        $this->prepareSimpleIcons();
         $this->prepareBootstrap();
         $this->prepareUniform();
         $this->prepareDatatables();
@@ -78,6 +79,38 @@ class MetronicPreparerCommand extends ContainerAwareCommand
 
         if ($this->output->getVerbosity()) {
             $this->output->writeln('<info>All resources prepared.</info>');
+        }
+    }
+
+    /**
+     * Prepare bootstrap resources.
+     */
+    protected function prepareSimpleIcons()
+    {
+        $srcPath = $this->srcRoot . '/theme/assets/global/plugins/simple-line-icons/';
+        if (!$this->fs->exists($srcPath . 'simple-line-icons.css')) {
+            $this->output->writeln('<error>Error with get source file for simple-line-icons.css.</error>');
+            return;
+        }
+        $css = str_replace(
+            'fonts/Simple-Line-Icons',
+            '../fonts/Simple-Line-Icons',
+            file_get_contents($srcPath . 'simple-line-icons.css')
+        );
+        $this->fs->mkdir($this->tmpRoot . '/css', 0644);
+        try {
+            $this->fs->dumpFile($this->tmpRoot . '/css/simple-line-icons.css', $css);
+        } catch (\Exception $e) {
+            $this->output->writeln(sprintf('<error>Exception: "%s".</error>', $e->getMessage()));
+            $this->output->writeln('<error>Error with saving tmp file for simple-line-icons.css.</error>');
+            return;
+        }
+        if ($this->output->getVerbosity() === 2) {
+            $this->output->writeln('<ok>+</ok> <log>Stylesheet simple-line-icons.css prepared.</log>');
+        }
+
+        if ($this->output->getVerbosity()) {
+            $this->output->writeln('<log>Simple line icons plugin prepared.</log> <ok> OK </ok>');
         }
     }
 
